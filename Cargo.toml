@@ -1,0 +1,10 @@
+[package]
+name = "blurrr"
+version = "0.1.0"
+authors = ["Raph Levien <raph.levien@gmail.com>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+druid = { git = "https://github.com/xi-editor/druid", rev = "ace395926ec641fbc6da75a250c837f3f55f7fbd" }
