@@ -1,10 +1,9 @@
 use druid::piet::InterpolationMode;
 use druid::widget::prelude::*;
 use druid::widget::{Flex, Slider};
-use druid::{
-    AppLauncher, Color, Data, Lens, LocalizedString, Point, Rect, Widget, WidgetExt, WindowDesc,
-};
+use druid::{AppLauncher, Data, Lens, LocalizedString, Widget, WidgetExt, WindowDesc};
 
+mod distfield;
 mod image;
 mod integration;
 mod math;
@@ -48,15 +47,8 @@ impl Widget<AppState> for BlurWidget {
     }
 
     fn paint(&mut self, ctx: &mut PaintCtx, data: &AppState, _env: &Env) {
-        // Let's draw a picture with Piet!
-
-        // Clear the whole widget with the color of your choice
-        // (ctx.size() returns the size of the layout rect we're painting in)
-        let size = ctx.size();
-        let rect = Rect::from_origin_size(Point::ORIGIN, size);
-        //ctx.fill(rect.to_rounded_rect(data.radius), &Color::WHITE);
         let radius = data.radius.min(0.5 * data.width.min(data.height));
-        let data = integration::gen_integrate(
+        let d0 = distfield::gen_distfield(
             IM_WIDTH,
             IM_HEIGHT,
             data.width,
@@ -64,7 +56,15 @@ impl Widget<AppState> for BlurWidget {
             radius,
             data.std_dev,
         );
-        let image = image::make_image_one(ctx, IM_WIDTH, IM_HEIGHT, &data);
+        let d1 = integration::gen_integrate(
+            IM_WIDTH,
+            IM_HEIGHT,
+            data.width,
+            data.height,
+            radius,
+            data.std_dev,
+        );
+        let image = image::make_image_two(ctx, IM_WIDTH, IM_HEIGHT, &d0, &d1);
         let rect = Size::new(IM_WIDTH as f64, IM_HEIGHT as f64).to_rect();
         ctx.draw_image(&image, rect, InterpolationMode::Bilinear);
     }

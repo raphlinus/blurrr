@@ -26,7 +26,6 @@ pub fn gen_integrate(width: usize, height: usize, w: f64, h: f64, r: f64, s: f64
                     line[i] += compute_erf7((xmax - x) * s_inv) + compute_erf7((xmax + x) * s_inv);
                 }
             }
-
         }
         let off0 = (j + height / 2) * width;
         let off1 = (height / 2 - j - 1) * width;
