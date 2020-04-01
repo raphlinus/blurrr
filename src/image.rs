@@ -17,8 +17,8 @@ pub fn make_image_one(ctx: &mut PaintCtx, w: usize, h: usize, data: &[u8]) -> Im
 pub fn make_image_two(ctx: &mut PaintCtx, w: usize, h: usize, d0: &[u8], d1: &[u8]) -> Image {
     let mut buf = vec![255u8; w * h * 4];
     for i in 0..(w * h) {
-        let r = d0[i];
-        let g = d1[i];
+        let r = d0[i] ^ 0;
+        let g = d1[i] ^ 0;
         buf[i * 4] = r;
         buf[i * 4 + 1] = g;
         buf[i * 4 + 2] = g;
