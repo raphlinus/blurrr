@@ -71,6 +71,7 @@ impl Widget<AppState> for BlurWidget {
             data.std_dev,
         );
         let image = image::make_image_two(ctx, IM_WIDTH, IM_HEIGHT, &d0, &d1);
+        //let image = image::make_image_one(ctx, IM_WIDTH, IM_HEIGHT, &d0);
         let scale = (ctx.size().width / IM_WIDTH as f64).min(ctx.size().height / IM_HEIGHT as f64);
         let rect = (Size::new(IM_WIDTH as f64, IM_HEIGHT as f64) * scale).to_rect();
         ctx.draw_image(&image, rect, InterpolationMode::NearestNeighbor);
