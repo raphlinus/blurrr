@@ -14,7 +14,7 @@ pub fn make_image_one(ctx: &mut PaintCtx, w: usize, h: usize, data: &[u8]) -> Im
     ctx.make_image(w, h, &buf, ImageFormat::RgbaPremul).unwrap()
 }
 
-const N_STEPS: f64 = 255.0;
+const N_STEPS: f64 = 6.0;
 
 fn quantize(b: u8) -> u8 {
     ((b as f64 * (N_STEPS / 255.0)).round() * (255.0 / N_STEPS)).round() as u8

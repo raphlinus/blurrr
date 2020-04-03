@@ -15,9 +15,11 @@ struct AppState {
     radius: f64,
     std_dev: f64,
 
+    /*
     // extra parameters for distance field renderer
     r_mul: f64,
     exponent: f64,
+    */
 }
 
 struct BlurWidget;
@@ -59,8 +61,6 @@ impl Widget<AppState> for BlurWidget {
             data.height,
             radius,
             data.std_dev,
-            data.r_mul,
-            data.exponent,
         );
         let d1 = integration::gen_integrate(
             IM_WIDTH,
@@ -88,10 +88,12 @@ fn ui_builder() -> impl Widget<AppState> {
         .with_child(Slider::new().with_range(0.0, 50.0).lens(AppState::radius))
         .with_spacer(5.0)
         .with_child(Slider::new().with_range(0.0, 50.0).lens(AppState::std_dev))
+        /*
         .with_spacer(5.0)
         .with_child(Slider::new().with_range(1.0, 5.0).lens(AppState::r_mul))
         .with_spacer(5.0)
         .with_child(Slider::new().with_range(2.0, 10.0).lens(AppState::exponent))
+        */
         .with_spacer(5.0)
         .with_flex_child(BlurWidget, 1.0)
 }
@@ -103,8 +105,10 @@ fn main() {
         radius: 5.0,
         std_dev: 5.0,
 
+        /*
         r_mul: 1.0,
         exponent: 2.0,
+        */
     };
     let main_window = WindowDesc::new(ui_builder).title(LocalizedString::new("blur toy"));
     AppLauncher::with_window(main_window).launch(data).unwrap();
