@@ -1,10 +1,11 @@
 [package]
 name = "blurrr"
 version = "0.1.0"
+license = "MIT/Apache-2.0"
+description = "A fast implementation of blurred rounded rectangles"
 authors = ["Raph Levien <raph.levien@gmail.com>"]
+readme = "README.md"
 edition = "2018"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
 druid = "0.5"
